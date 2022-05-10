@@ -11,18 +11,29 @@
 {% block content %}
 <table class="table">
     <thead>
-        <th>Name
+        <th>Image
+        <th><a href="{% url 'index' %}?sort=name">Name</a>
         <th>Description
-        <th>Ages
-        <th>Price
+        <th><a href="{% url 'index' %}?sort=ages">Ages</a>
+        <th><a href="{% url 'index' %}?sort=price">Price</a>
     </thead>
     <tbody>
 {% for p in products %}
+{% with img=p.random_image %}      
     <tr>
+      <td>
+      {% if img %}
+        {% if image.width > image.height %}
+        <img src="{{img.image.url}}" alt="{{img.caption}}" width="100"></td>
+        {% else %}
+         <img src="{{img.image.url}}" alt="{{img.caption}}" height="100"></td>
+        {% endif %}
+      {% endif %}     
         <td><a href="{% url 'show' p.id %}">{{ p.name }}</a>
         <td>{{ p.description|truncatewords:5 }}
         <td class="right">{{ p.age_range }}
         <td class="right">{{ p.price|floatformat:2 }}
+{% endwith %}
 {% endfor %}
     </tbody>
 </table>
