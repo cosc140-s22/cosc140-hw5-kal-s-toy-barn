@@ -8,5 +8,10 @@
 
 ## Feedback
 
-Once you commit and submit your work to Github, I'll update this section with feedback.
+N
+
+One thing that needs some fixing: 
+in the index view function, when you sort by age or price, you should be using the `products` object to call the `order_by` method on so that you also do any necessary filtering, rather than calling it on `Product.objects.all()...` since tht will get rid of the filtering that may have happened earlier in the function.
+
+Everything else looked fine.
 
